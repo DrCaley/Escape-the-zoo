@@ -109,7 +109,7 @@ const LEVELS = [
         map: [
             "WWWWWWWWWWWW",
             "W........C.W",
-            "W....WWWWWWW",
+            "W.K..WWWWWWW",
             "W.B..~~....W",
             "W.B..~~..K.W",
             "W....~~..C.W",
@@ -125,7 +125,7 @@ const LEVELS = [
             { x: 3, y: 7, patrolAxis: 'x', min: 1, max: 6, dir: 1, speed: 900 }
         ],
         boxes: [{ x: 2, y: 3 }, { x: 2, y: 4 }],
-        keys: [{ x: 9, y: 4, collected: false }],
+        keys: [{ x: 2, y: 2, collected: false }, { x: 9, y: 4, collected: false }],
         switches: [],
         gates: [],
         water: [
