@@ -14,7 +14,15 @@
         <div id="start-screen" class="screen">
             <p>You're a clever monkey who escaped your cage!</p>
             <p>Help free all your animal friends!</p>
-            <p>Use <strong>Arrow Keys</strong> to move</p>
+            <div class="controls-info">
+                <p>🎮 <strong>Arrow Keys</strong> or <strong>WASD</strong> to move</p>
+                <p>📦 Push boxes to solve puzzles</p>
+                <p>🔑 Collect keys to open cages</p>
+                <p>🔴 Push boxes onto switches to open gates</p>
+                <p>🌊 Push boxes into water to make bridges</p>
+                <p>👨‍🔧 Avoid the zookeepers!</p>
+                <p>🔄 Press <strong>R</strong> to restart level</p>
+            </div>
             <button id="start-btn" onclick="startGame()">🎮 Start Game!</button>
         </div>
         
@@ -22,37 +30,39 @@
         <div id="game-screen" class="screen" style="display: none;">
             <div id="game-info">
                 <span id="level-display">Level 1</span>
-                <span id="animals-display">Animals: 0/2</span>
+                <span id="keys-display">🔑 x0</span>
+                <span id="animals-display">Freed: 0/2</span>
             </div>
+            <p id="hint-text" class="hint">Hint will appear here</p>
             <div id="game-board"></div>
             <p id="message"></p>
-        </div>
-        
-        <!-- Puzzle Screen -->
-        <div id="puzzle-screen" class="screen" style="display: none;">
-            <h2 id="puzzle-title">🔓 Solve to Free the Animal!</h2>
-            <div id="puzzle-content"></div>
-            <input type="text" id="puzzle-answer" placeholder="Your answer...">
-            <button onclick="checkPuzzleAnswer()">Submit Answer</button>
-            <p id="puzzle-message"></p>
+            <button class="restart-btn" onclick="loadLevel(currentLevel)">🔄 Restart Level</button>
         </div>
         
         <!-- Caught Screen -->
         <div id="caught-screen" class="screen" style="display: none;">
-            <h2>😱 Oh no! You got caught!</h2>
-            <p>Solve this puzzle to escape!</p>
-            <div id="escape-puzzle-content"></div>
-            <input type="text" id="escape-answer" placeholder="Quick! Answer...">
-            <button onclick="checkEscapeAnswer()">Escape!</button>
-            <p id="escape-message"></p>
+            <h2>😱 Oh no! Caught!</h2>
+            <p>The zookeeper got you!</p>
+            <p>Don't worry, try again!</p>
+            <button onclick="retryLevel()">🔄 Try Again!</button>
         </div>
         
         <!-- Win Screen -->
         <div id="win-screen" class="screen" style="display: none;">
-            <h2>🎉 YOU DID IT! 🎉</h2>
-            <p>All the animals are FREE!</p>
+            <h2>🎉 Level Complete! 🎉</h2>
+            <p id="win-level-name"></p>
+            <p>You freed:</p>
             <div id="freed-animals"></div>
             <button onclick="nextLevel()">Next Level →</button>
+        </div>
+        
+        <!-- Victory Screen (all levels complete) -->
+        <div id="victory-screen" class="screen" style="display: none;">
+            <h2>🏆 ZOO HERO! 🏆</h2>
+            <p>You freed ALL the animals!</p>
+            <div id="all-freed-animals"></div>
+            <p>Amazing puzzle solving skills!</p>
+            <button onclick="playAgain()">🔄 Play Again!</button>
         </div>
     </div>
     
