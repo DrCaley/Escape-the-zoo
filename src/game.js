@@ -188,9 +188,9 @@ const LEVELS = [
             "W..WWWWGWWWWWW",
             "W..W...S...K.W",
             "W..W.B.......W",
-            "W..WWWWWWW~~CW",
-            "W........W~~.W",
-            "W.B......W...W",
+            "W..WWWWWWW.C.W",
+            "W........W...W",
+            "W.B..~~..W.K.W",
             "WWWWWGWWWW...W",
             "W.S......B.C.W",
             "WWWWWWWWWWWWWW"
@@ -201,11 +201,11 @@ const LEVELS = [
             { x: 11, y: 9, type: 'LION', freed: false }
         ],
         zookeepers: [
-            { x: 5, y: 1, patrolAxis: 'x', min: 2, max: 8, dir: 1, speed: 700 },
-            { x: 5, y: 7, patrolAxis: 'x', min: 1, max: 7, dir: -1, speed: 800 }
+            { x: 5, y: 1, patrolAxis: 'x', min: 2, max: 8, dir: 1, speed: 500 },
+            { x: 5, y: 6, patrolAxis: 'x', min: 1, max: 7, dir: -1, speed: 550 }
         ],
-        boxes: [{ x: 5, y: 4 }, { x: 2, y: 7 }, { x: 11, y: 9 }],
-        keys: [{ x: 2, y: 1, collected: false }, { x: 12, y: 3, collected: false }],
+        boxes: [{ x: 5, y: 4 }, { x: 2, y: 7 }, { x: 9, y: 9 }],
+        keys: [{ x: 2, y: 1, collected: false }, { x: 12, y: 3, collected: false }, { x: 12, y: 7, collected: false }],
         switches: [
             { x: 7, y: 3, pressed: false, gateId: 0 },
             { x: 2, y: 9, pressed: false, gateId: 1 }
@@ -215,8 +215,7 @@ const LEVELS = [
             { x: 5, y: 8, open: false, id: 1 }
         ],
         water: [
-            { x: 10, y: 5, filled: false }, { x: 11, y: 5, filled: false },
-            { x: 10, y: 6, filled: false }, { x: 11, y: 6, filled: false }
+            { x: 5, y: 7, filled: false }, { x: 6, y: 7, filled: false }
         ]
     }
 ];
