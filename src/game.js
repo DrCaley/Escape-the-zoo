@@ -60,7 +60,8 @@ const LEVELS = [
             { x: 7, y: 4, type: 'LION', freed: false }
         ],
         zookeepers: [
-            { x: 5, y: 2, patrolAxis: 'x', min: 3, max: 7, dir: 1, speed: 1200 }
+            { x: 5, y: 2, patrolAxis: 'x', min: 2, max: 7, dir: 1, speed: 700 },
+            { x: 6, y: 5, patrolAxis: 'x', min: 4, max: 7, dir: -1, speed: 800 }
         ],
         boxes: [{ x: 3, y: 4 }],
         keys: [{ x: 3, y: 3, collected: false }],
@@ -90,7 +91,8 @@ const LEVELS = [
             { x: 7, y: 1, type: 'PENGUIN', freed: false }
         ],
         zookeepers: [
-            { x: 6, y: 4, patrolAxis: 'y', min: 3, max: 6, dir: 1, speed: 1000 }
+            { x: 6, y: 4, patrolAxis: 'y', min: 3, max: 6, dir: 1, speed: 600 },
+            { x: 2, y: 3, patrolAxis: 'x', min: 1, max: 3, dir: 1, speed: 700 }
         ],
         boxes: [{ x: 2, y: 4 }],
         keys: [{ x: 7, y: 5, collected: false }],
@@ -122,7 +124,8 @@ const LEVELS = [
             { x: 9, y: 5, type: 'BEAR', freed: false }
         ],
         zookeepers: [
-            { x: 3, y: 7, patrolAxis: 'x', min: 1, max: 6, dir: 1, speed: 900 }
+            { x: 3, y: 7, patrolAxis: 'x', min: 1, max: 9, dir: 1, speed: 500 },
+            { x: 8, y: 3, patrolAxis: 'y', min: 3, max: 5, dir: 1, speed: 600 }
         ],
         boxes: [{ x: 2, y: 3 }, { x: 2, y: 4 }],
         keys: [{ x: 2, y: 2, collected: false }, { x: 9, y: 4, collected: false }],
@@ -159,7 +162,8 @@ const LEVELS = [
             { x: 9, y: 5, type: 'PARROT', freed: false }
         ],
         zookeepers: [
-            { x: 5, y: 4, patrolAxis: 'x', min: 4, max: 9, dir: 1, speed: 900 }
+            { x: 5, y: 4, patrolAxis: 'x', min: 4, max: 9, dir: 1, speed: 450 },
+            { x: 6, y: 8, patrolAxis: 'x', min: 4, max: 9, dir: -1, speed: 550 }
         ],
         boxes: [{ x: 2, y: 5 }, { x: 2, y: 6 }],
         keys: [{ x: 1, y: 8, collected: false }, { x: 10, y: 3, collected: false }],
