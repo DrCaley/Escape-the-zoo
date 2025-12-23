@@ -189,10 +189,10 @@ const LEVELS = [
             "W..W...S...K.W",
             "W..W.B.......W",
             "W..WWWWWWW.C.W",
-            "W........W...W",
+            "W.B......W...W",
             "W.B..~~..W.K.W",
             "WWWWWGWWWW...W",
-            "W.S......B.C.W",
+            "W.S........C.W",
             "WWWWWWWWWWWWWW"
         ],
         animals: [
@@ -204,7 +204,7 @@ const LEVELS = [
             { x: 5, y: 1, patrolAxis: 'x', min: 2, max: 8, dir: 1, speed: 500 },
             { x: 5, y: 6, patrolAxis: 'x', min: 1, max: 7, dir: -1, speed: 550 }
         ],
-        boxes: [{ x: 5, y: 4 }, { x: 2, y: 7 }, { x: 9, y: 9 }],
+        boxes: [{ x: 5, y: 4 }, { x: 2, y: 6 }, { x: 2, y: 7 }],
         keys: [{ x: 2, y: 1, collected: false }, { x: 12, y: 3, collected: false }, { x: 12, y: 7, collected: false }],
         switches: [
             { x: 7, y: 3, pressed: false, gateId: 0 },
