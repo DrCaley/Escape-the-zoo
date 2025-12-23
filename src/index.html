@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐵 Escape the Zoo!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <h1>🐵 Escape the Zoo! 🦁</h1>
+        
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen">
+            <p>You're a clever monkey who escaped your cage!</p>
+            <p>Help free all your animal friends!</p>
+            <p>Use <strong>Arrow Keys</strong> to move</p>
+            <button id="start-btn" onclick="startGame()">🎮 Start Game!</button>
+        </div>
+        
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen" style="display: none;">
+            <div id="game-info">
+                <span id="level-display">Level 1</span>
+                <span id="animals-display">Animals: 0/2</span>
+            </div>
+            <div id="game-board"></div>
+            <p id="message"></p>
+        </div>
+        
+        <!-- Puzzle Screen -->
+        <div id="puzzle-screen" class="screen" style="display: none;">
+            <h2 id="puzzle-title">🔓 Solve to Free the Animal!</h2>
+            <div id="puzzle-content"></div>
+            <input type="text" id="puzzle-answer" placeholder="Your answer...">
+            <button onclick="checkPuzzleAnswer()">Submit Answer</button>
+            <p id="puzzle-message"></p>
+        </div>
+        
+        <!-- Caught Screen -->
+        <div id="caught-screen" class="screen" style="display: none;">
+            <h2>😱 Oh no! You got caught!</h2>
+            <p>Solve this puzzle to escape!</p>
+            <div id="escape-puzzle-content"></div>
+            <input type="text" id="escape-answer" placeholder="Quick! Answer...">
+            <button onclick="checkEscapeAnswer()">Escape!</button>
+            <p id="escape-message"></p>
+        </div>
+        
+        <!-- Win Screen -->
+        <div id="win-screen" class="screen" style="display: none;">
+            <h2>🎉 YOU DID IT! 🎉</h2>
+            <p>All the animals are FREE!</p>
+            <div id="freed-animals"></div>
+            <button onclick="nextLevel()">Next Level →</button>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>

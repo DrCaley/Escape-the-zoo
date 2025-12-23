@@ -1,0 +1,28 @@
+{
+  "$schema": "https://rapid-method.dev/schemas/rapid-status.schema.json",
+  "project": {
+    "name": "Kids Game",
+    "created": "2025-12-23",
+    "lastUpdated": "2025-12-23T20:35:47Z",
+    "status": "ACTIVE"
+  },
+  "iteration": {
+    "number": 1,
+    "name": "Initial Setup",
+    "type": "foundation",
+    "status": "ACTIVE",
+    "startedAt": "2025-12-23"
+  },
+  "currentPhase": {
+    "phase": "R",
+    "phaseName": "Requirements",
+    "step": "1.1",
+    "stepName": "Capture Raw Content",
+    "status": "not-started",
+    "startedAt": "2025-12-23T20:35:47Z"
+  },
+  "sessionContext": {
+    "lastActive": "2025-12-23T20:35:47Z",
+    "mode": "interactive"
+  }
+}

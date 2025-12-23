@@ -1,0 +1,19 @@
+{
+  "$schema": "https://rapid-method.dev/schemas/rapid-config.schema.json",
+  "version": "1.0",
+  "mode": "interactive",
+  "project": {
+    "name": "Kids Game",
+    "rigorLevel": "standard",
+    "activeSolutionTemplates": []
+  },
+  "paths": {
+    "designRoot": "design/",
+    "statusFile": "rapid-status.json",
+    "sessionLog": "rapid-session-log.jsonl",
+    "indexes": {
+      "method": ".index/index.yaml",
+      "project": "design/.index/index.yaml"
+    }
+  }
+}
