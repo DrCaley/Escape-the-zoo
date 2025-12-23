@@ -147,8 +147,8 @@ const LEVELS = [
             "W.....G....C.W",
             "W.S...WWWWWWWW",
             "W.....W......W",
-            "WWWWWWW..B...W",
-            "W.K..~~..B.C.W",
+            "WWWWWWW......W",
+            "W.K..~~....C.W",
             "W....~~......W",
             "W....~~WWWWWWW",
             "W..B.......K.W",
@@ -160,9 +160,9 @@ const LEVELS = [
         ],
         zookeepers: [
             { x: 3, y: 3, patrolAxis: 'x', min: 1, max: 5, dir: 1, speed: 850 },
-            { x: 10, y: 4, patrolAxis: 'y', min: 3, max: 6, dir: 1, speed: 950 }
+            { x: 9, y: 4, patrolAxis: 'y', min: 3, max: 6, dir: 1, speed: 950 }
         ],
-        boxes: [{ x: 3, y: 8 }, { x: 9, y: 4 }, { x: 11, y: 4 }],
+        boxes: [{ x: 3, y: 8 }, { x: 8, y: 4 }, { x: 10, y: 4 }],
         keys: [{ x: 2, y: 5, collected: false }, { x: 12, y: 8, collected: false }],
         switches: [{ x: 2, y: 2, pressed: false, gateId: 0 }],
         gates: [{ x: 6, y: 1, open: false, id: 0 }],
