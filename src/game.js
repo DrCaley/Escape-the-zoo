@@ -11,6 +11,10 @@ const EMOJI = {
     GIRAFFE: '🦒',
     PARROT: '🦜',
     TIGER: '🐯',
+    ZEBRA: '🦓',
+    HIPPO: '🦛',
+    KOALA: '🐨',
+    PANDA: '🐼',
     ZOOKEEPER: '👨‍🔧',
     KEY: '🔑',
     BOX: '📦',
@@ -18,7 +22,8 @@ const EMOJI = {
     SWITCH_ON: '🟢',
     GATE_CLOSED: '🚧',
     GATE_OPEN: '✨',
-    WATER: '🌊'
+    WATER: '🌊',
+    ICE: '🧊'
 };
 
 // ===== GAME STATE =====
@@ -29,12 +34,14 @@ let boxes = [];
 let switches = [];
 let gates = [];
 let waterTiles = [];
+let iceTiles = [];
 let animals = [];
 let zookeepers = [];
 let freedAnimals = [];
 let levelMap = [];
 let gameRunning = false;
 let levelKeys = [];
+let debugMode = false;
 
 // ===== LEVELS - Real Puzzle Design! =====
 const LEVELS = [
@@ -67,7 +74,8 @@ const LEVELS = [
         keys: [{ x: 3, y: 3, collected: false }],
         switches: [],
         gates: [],
-        water: []
+        water: [],
+        ice: []
     },
     
     // LEVEL 2: Switches and Gates
@@ -98,7 +106,8 @@ const LEVELS = [
         keys: [{ x: 7, y: 5, collected: false }],
         switches: [{ x: 4, y: 4, pressed: false, gateId: 0 }],
         gates: [{ x: 5, y: 2, open: false, id: 0 }],
-        water: []
+        water: [],
+        ice: []
     },
     
     // LEVEL 3: Water crossing - build a bridge!
@@ -135,7 +144,8 @@ const LEVELS = [
             { x: 5, y: 3, filled: false }, { x: 6, y: 3, filled: false },
             { x: 5, y: 4, filled: false }, { x: 6, y: 4, filled: false },
             { x: 5, y: 5, filled: false }, { x: 6, y: 5, filled: false }
-        ]
+        ],
+        ice: []
     },
     
     // LEVEL 4: All mechanics combined!
@@ -172,7 +182,8 @@ const LEVELS = [
         water: [
             { x: 3, y: 5, filled: false },
             { x: 3, y: 6, filled: false }
-        ]
+        ],
+        ice: []
     },
     
     // LEVEL 5: Bonus Challenge!
@@ -216,6 +227,217 @@ const LEVELS = [
         ],
         water: [
             { x: 5, y: 7, filled: false }, { x: 6, y: 7, filled: false }
+        ],
+        ice: []
+    },
+    
+    // LEVEL 6: Introducing ICE! ❄️
+    {
+        name: "Level 6: Slippery Start",
+        width: 12,
+        height: 9,
+        hint: "🧊 ICE is slippery! You'll slide until you hit something!",
+        playerStart: { x: 1, y: 7 },
+        map: [
+            "WWWWWWWWWWWW",
+            "W..........W",
+            "W....C.....W",
+            "W..WWWWWW..W",
+            "W..W....W..W",
+            "W..W.K..W..W",
+            "W..WWWWWW..W",
+            "W..........W",
+            "WWWWWWWWWWWW"
+        ],
+        animals: [
+            { x: 5, y: 2, type: 'ZEBRA', freed: false }
+        ],
+        zookeepers: [
+            { x: 9, y: 4, patrolAxis: 'y', min: 1, max: 7, dir: 1, speed: 600 }
+        ],
+        boxes: [],
+        keys: [{ x: 5, y: 5, collected: false }],
+        switches: [],
+        gates: [],
+        water: [],
+        ice: [
+            { x: 4, y: 4 }, { x: 5, y: 4 }, { x: 6, y: 4 }, { x: 7, y: 4 },
+            { x: 4, y: 5 }, { x: 6, y: 5 }, { x: 7, y: 5 }
+        ]
+    },
+    
+    // LEVEL 7: Ice and Boxes
+    {
+        name: "Level 7: Ice Box Slide",
+        width: 12,
+        height: 10,
+        hint: "Push 📦 boxes on 🧊 ice - they slide too!",
+        playerStart: { x: 1, y: 8 },
+        map: [
+            "WWWWWWWWWWWW",
+            "W........C.W",
+            "W..........W",
+            "W...WWWWWWWW",
+            "W...W......W",
+            "W.B.W..K...W",
+            "W...W......W",
+            "W...WWWWWWWW",
+            "W..........W",
+            "WWWWWWWWWWWW"
+        ],
+        animals: [
+            { x: 9, y: 1, type: 'HIPPO', freed: false }
+        ],
+        zookeepers: [
+            { x: 6, y: 2, patrolAxis: 'x', min: 1, max: 9, dir: 1, speed: 500 },
+            { x: 2, y: 6, patrolAxis: 'y', min: 4, max: 8, dir: 1, speed: 650 }
+        ],
+        boxes: [{ x: 2, y: 5 }],
+        keys: [{ x: 7, y: 5, collected: false }],
+        switches: [],
+        gates: [],
+        water: [],
+        ice: [
+            { x: 5, y: 4 }, { x: 6, y: 4 }, { x: 7, y: 4 }, { x: 8, y: 4 }, { x: 9, y: 4 },
+            { x: 5, y: 5 }, { x: 6, y: 5 }, { x: 8, y: 5 }, { x: 9, y: 5 },
+            { x: 5, y: 6 }, { x: 6, y: 6 }, { x: 7, y: 6 }, { x: 8, y: 6 }, { x: 9, y: 6 }
+        ]
+    },
+    
+    // LEVEL 8: Ice Maze with Switches
+    {
+        name: "Level 8: Frozen Gates",
+        width: 14,
+        height: 10,
+        hint: "Slide the 📦 onto the 🔴 switch to open the gate!",
+        playerStart: { x: 1, y: 8 },
+        map: [
+            "WWWWWWWWWWWWWW",
+            "W............W",
+            "W....WWGWWWWWW",
+            "W....W.....C.W",
+            "W..B.W.......W",
+            "W....W.S.....W",
+            "W....WWWWWWWWW",
+            "W.K..........W",
+            "W............W",
+            "WWWWWWWWWWWWWW"
+        ],
+        animals: [
+            { x: 11, y: 3, type: 'KOALA', freed: false }
+        ],
+        zookeepers: [
+            { x: 8, y: 1, patrolAxis: 'x', min: 1, max: 11, dir: 1, speed: 450 },
+            { x: 10, y: 7, patrolAxis: 'x', min: 6, max: 12, dir: -1, speed: 550 }
+        ],
+        boxes: [{ x: 3, y: 4 }],
+        keys: [{ x: 2, y: 7, collected: false }],
+        switches: [{ x: 7, y: 5, pressed: false, gateId: 0 }],
+        gates: [{ x: 7, y: 2, open: false, id: 0 }],
+        water: [],
+        ice: [
+            { x: 4, y: 3 }, { x: 4, y: 4 }, { x: 4, y: 5 },
+            { x: 6, y: 3 }, { x: 7, y: 3 }, { x: 8, y: 3 }, { x: 9, y: 3 }, { x: 10, y: 3 },
+            { x: 6, y: 4 }, { x: 7, y: 4 }, { x: 8, y: 4 }, { x: 9, y: 4 }, { x: 10, y: 4 },
+            { x: 6, y: 5 }, { x: 8, y: 5 }, { x: 9, y: 5 }, { x: 10, y: 5 }
+        ]
+    },
+    
+    // LEVEL 9: Ice, Water, and Switches Combined!
+    {
+        name: "Level 9: Arctic Challenge",
+        width: 14,
+        height: 11,
+        hint: "Use ice to slide boxes into water AND onto switches!",
+        playerStart: { x: 1, y: 9 },
+        map: [
+            "WWWWWWWWWWWWWW",
+            "W.K........C.W",
+            "W..WWWWGWWWWWW",
+            "W..W.....S...W",
+            "W..W.........W",
+            "W.BW..~~.....W",
+            "W.BW..~~...C.W",
+            "W..WWWWWWWWWWW",
+            "W..K.........W",
+            "W............W",
+            "WWWWWWWWWWWWWW"
+        ],
+        animals: [
+            { x: 11, y: 1, type: 'PANDA', freed: false },
+            { x: 11, y: 6, type: 'PENGUIN', freed: false }
+        ],
+        zookeepers: [
+            { x: 5, y: 9, patrolAxis: 'x', min: 1, max: 11, dir: 1, speed: 400 },
+            { x: 8, y: 4, patrolAxis: 'y', min: 3, max: 6, dir: 1, speed: 500 }
+        ],
+        boxes: [{ x: 2, y: 5 }, { x: 2, y: 6 }],
+        keys: [{ x: 2, y: 1, collected: false }, { x: 3, y: 8, collected: false }],
+        switches: [{ x: 9, y: 3, pressed: false, gateId: 0 }],
+        gates: [{ x: 7, y: 2, open: false, id: 0 }],
+        water: [
+            { x: 6, y: 5, filled: false }, { x: 7, y: 5, filled: false },
+            { x: 6, y: 6, filled: false }, { x: 7, y: 6, filled: false }
+        ],
+        ice: [
+            { x: 4, y: 3 }, { x: 5, y: 3 }, { x: 6, y: 3 }, { x: 7, y: 3 }, { x: 8, y: 3 }, { x: 10, y: 3 }, { x: 11, y: 3 },
+            { x: 4, y: 4 }, { x: 5, y: 4 }, { x: 6, y: 4 }, { x: 7, y: 4 }, { x: 9, y: 4 }, { x: 10, y: 4 }, { x: 11, y: 4 },
+            { x: 4, y: 5 }, { x: 5, y: 5 }, { x: 8, y: 5 }, { x: 9, y: 5 }, { x: 10, y: 5 },
+            { x: 4, y: 6 }, { x: 5, y: 6 }, { x: 8, y: 6 }, { x: 9, y: 6 }, { x: 10, y: 6 }
+        ]
+    },
+    
+    // LEVEL 10: The Ultimate Challenge!
+    {
+        name: "Level 10: Ultimate Escape!",
+        width: 16,
+        height: 12,
+        hint: "The final challenge! Every mechanic combined! 🏆",
+        playerStart: { x: 1, y: 10 },
+        map: [
+            "WWWWWWWWWWWWWWWW",
+            "W..K...........W",
+            "W..WWWWGWWWWWWWW",
+            "W..W.....S...C.W",
+            "W..W...........W",
+            "W.BW..~~.......W",
+            "W..W..~~.....C.W",
+            "WWWW..WWWGWWWWWW",
+            "W.B......S...C.W",
+            "W..K...........W",
+            "W.........K....W",
+            "WWWWWWWWWWWWWWWW"
+        ],
+        animals: [
+            { x: 13, y: 3, type: 'TIGER', freed: false },
+            { x: 13, y: 6, type: 'ELEPHANT', freed: false },
+            { x: 13, y: 8, type: 'LION', freed: false }
+        ],
+        zookeepers: [
+            { x: 6, y: 1, patrolAxis: 'x', min: 1, max: 12, dir: 1, speed: 350 },
+            { x: 10, y: 4, patrolAxis: 'y', min: 3, max: 6, dir: 1, speed: 400 },
+            { x: 8, y: 9, patrolAxis: 'x', min: 4, max: 13, dir: -1, speed: 450 }
+        ],
+        boxes: [{ x: 2, y: 5 }, { x: 2, y: 8 }],
+        keys: [{ x: 3, y: 1, collected: false }, { x: 3, y: 9, collected: false }, { x: 10, y: 10, collected: false }],
+        switches: [
+            { x: 9, y: 3, pressed: false, gateId: 0 },
+            { x: 9, y: 8, pressed: false, gateId: 1 }
+        ],
+        gates: [
+            { x: 7, y: 2, open: false, id: 0 },
+            { x: 9, y: 7, open: false, id: 1 }
+        ],
+        water: [
+            { x: 6, y: 5, filled: false }, { x: 7, y: 5, filled: false },
+            { x: 6, y: 6, filled: false }, { x: 7, y: 6, filled: false }
+        ],
+        ice: [
+            { x: 4, y: 3 }, { x: 5, y: 3 }, { x: 6, y: 3 }, { x: 7, y: 3 }, { x: 8, y: 3 }, { x: 10, y: 3 }, { x: 11, y: 3 }, { x: 12, y: 3 },
+            { x: 4, y: 4 }, { x: 5, y: 4 }, { x: 6, y: 4 }, { x: 7, y: 4 }, { x: 8, y: 4 }, { x: 9, y: 4 }, { x: 11, y: 4 }, { x: 12, y: 4 },
+            { x: 4, y: 5 }, { x: 5, y: 5 }, { x: 8, y: 5 }, { x: 9, y: 5 }, { x: 10, y: 5 }, { x: 11, y: 5 }, { x: 12, y: 5 },
+            { x: 4, y: 6 }, { x: 5, y: 6 }, { x: 8, y: 6 }, { x: 9, y: 6 }, { x: 10, y: 6 }, { x: 11, y: 6 }, { x: 12, y: 6 },
+            { x: 4, y: 8 }, { x: 5, y: 8 }, { x: 6, y: 8 }, { x: 7, y: 8 }, { x: 8, y: 8 }, { x: 10, y: 8 }, { x: 11, y: 8 }, { x: 12, y: 8 }
         ]
     }
 ];
@@ -248,6 +470,7 @@ function loadLevel(levelIndex) {
     switches = level.switches.map(s => ({ ...s, pressed: false }));
     gates = level.gates.map(g => ({ ...g, open: false }));
     waterTiles = level.water.map(w => ({ ...w, filled: false }));
+    iceTiles = (level.ice || []).map(i => ({ ...i }));
     animals = level.animals.map(a => ({ ...a, freed: false }));
     zookeepers = level.zookeepers.map(z => ({ ...z, currentX: z.x, currentY: z.y }));
     levelKeys = level.keys.map(k => ({ ...k, collected: false }));
@@ -297,6 +520,13 @@ function renderBoard() {
                     bgClass = 'water';
                     content = EMOJI.WATER;
                 }
+            }
+            
+            // Check for ice tiles
+            const ice = iceTiles.find(i => i.x === x && i.y === y);
+            if (ice) {
+                bgClass = 'ice';
+                content = EMOJI.ICE;
             }
             
             // Check for switches (on floor)
@@ -454,6 +684,14 @@ function tryMove(dx, dy) {
     
     updateUI();
     renderBoard();
+    
+    // Ice sliding! If we're on ice, keep sliding!
+    const onIce = iceTiles.find(i => i.x === player.x && i.y === player.y);
+    if (onIce && gameRunning) {
+        setTimeout(() => {
+            if (gameRunning) slideOnIce(dx, dy);
+        }, 100);
+    }
 }
 
 function tryPushBox(box, dx, dy) {
@@ -616,3 +854,225 @@ function playAgain() {
     freedAnimals = [];
     loadLevel(0);
 }
+
+// ===== ICE SLIDING =====
+function slideOnIce(dx, dy) {
+    const level = LEVELS[currentLevel];
+    const nextX = player.x + dx;
+    const nextY = player.y + dy;
+    
+    // Check if we can continue sliding
+    if (nextX < 0 || nextX >= level.width || nextY < 0 || nextY >= level.map.length) {
+        return; // Hit boundary, stop
+    }
+    
+    if (levelMap[nextY][nextX] === 'wall') return; // Hit wall, stop
+    
+    const gate = gates.find(g => g.x === nextX && g.y === nextY);
+    if (gate && !gate.open) return; // Hit closed gate, stop
+    
+    const water = waterTiles.find(w => w.x === nextX && w.y === nextY);
+    if (water && !water.filled) return; // Hit water, stop
+    
+    const box = boxes.find(b => b.x === nextX && b.y === nextY);
+    if (box) {
+        // Try to push the box while sliding!
+        if (!tryPushBoxOnIce(box, dx, dy)) {
+            return; // Can't push, stop sliding
+        }
+    }
+    
+    const animal = animals.find(a => a.x === nextX && a.y === nextY && !a.freed);
+    if (animal) {
+        // Slide into animal cage
+        if (keysCollected > 0) {
+            keysCollected--;
+            animal.freed = true;
+            freedAnimals.push(EMOJI[animal.type]);
+            showMessage(`🎉 Freed the ${EMOJI[animal.type]}!`);
+            if (animals.every(a => a.freed)) {
+                player.x = nextX;
+                player.y = nextY;
+                updateUI();
+                renderBoard();
+                setTimeout(winLevel, 600);
+                return;
+            }
+        } else {
+            showMessage("🔒 Need a key!");
+            updateUI();
+            renderBoard();
+            return; // Stop at cage without key
+        }
+    }
+    
+    // Continue sliding
+    player.x = nextX;
+    player.y = nextY;
+    
+    // Pick up keys while sliding
+    const key = levelKeys.find(k => k.x === nextX && k.y === nextY && !k.collected);
+    if (key) {
+        key.collected = true;
+        keysCollected++;
+        showMessage("🔑 Got a key!");
+    }
+    
+    checkZookeeperCollision();
+    updateUI();
+    renderBoard();
+    
+    // Keep sliding if still on ice
+    const stillOnIce = iceTiles.find(i => i.x === player.x && i.y === player.y);
+    if (stillOnIce && gameRunning) {
+        setTimeout(() => {
+            if (gameRunning) slideOnIce(dx, dy);
+        }, 100);
+    }
+}
+
+function tryPushBoxOnIce(box, dx, dy) {
+    const level = LEVELS[currentLevel];
+    
+    // Slide the box until it hits something
+    let newBoxX = box.x + dx;
+    let newBoxY = box.y + dy;
+    
+    // First check: can the box move at all?
+    if (newBoxX < 0 || newBoxX >= level.width || newBoxY < 0 || newBoxY >= level.map.length) {
+        return false;
+    }
+    if (levelMap[newBoxY][newBoxX] === 'wall') return false;
+    
+    const gate = gates.find(g => g.x === newBoxX && g.y === newBoxY && !g.open);
+    if (gate) return false;
+    
+    const otherBox = boxes.find(b => b.x === newBoxX && b.y === newBoxY);
+    if (otherBox) return false;
+    
+    const animal = animals.find(a => a.x === newBoxX && a.y === newBoxY && !a.freed);
+    if (animal) return false;
+    
+    // Release old switch
+    const oldSwitch = switches.find(s => s.x === box.x && s.y === box.y && s.pressed);
+    if (oldSwitch) {
+        oldSwitch.pressed = false;
+        const connectedGate = gates.find(g => g.id === oldSwitch.gateId);
+        if (connectedGate) {
+            connectedGate.open = false;
+            showMessage("🚧 Gate closed!");
+        }
+    }
+    
+    // Check for water
+    const water = waterTiles.find(w => w.x === newBoxX && w.y === newBoxY && !w.filled);
+    if (water) {
+        water.filled = true;
+        const boxIndex = boxes.indexOf(box);
+        boxes.splice(boxIndex, 1);
+        showMessage("💦 Box fell in! Now you can cross!");
+        return true;
+    }
+    
+    // Move box to first position
+    box.x = newBoxX;
+    box.y = newBoxY;
+    
+    // Now slide the box on ice until it stops
+    let onIce = iceTiles.find(i => i.x === box.x && i.y === box.y);
+    while (onIce) {
+        const slideX = box.x + dx;
+        const slideY = box.y + dy;
+        
+        // Check if can continue
+        if (slideX < 0 || slideX >= level.width || slideY < 0 || slideY >= level.map.length) break;
+        if (levelMap[slideY][slideX] === 'wall') break;
+        
+        const slideGate = gates.find(g => g.x === slideX && g.y === slideY && !g.open);
+        if (slideGate) break;
+        
+        const slideOtherBox = boxes.find(b => b.x === slideX && b.y === slideY);
+        if (slideOtherBox) break;
+        
+        const slideAnimal = animals.find(a => a.x === slideX && a.y === slideY && !a.freed);
+        if (slideAnimal) break;
+        
+        // Check for water while sliding
+        const slideWater = waterTiles.find(w => w.x === slideX && w.y === slideY && !w.filled);
+        if (slideWater) {
+            slideWater.filled = true;
+            const boxIndex = boxes.indexOf(box);
+            boxes.splice(boxIndex, 1);
+            showMessage("💦 Box slid into water!");
+            return true;
+        }
+        
+        box.x = slideX;
+        box.y = slideY;
+        onIce = iceTiles.find(i => i.x === box.x && i.y === box.y);
+    }
+    
+    // Check if box landed on switch
+    const sw = switches.find(s => s.x === box.x && s.y === box.y);
+    if (sw && !sw.pressed) {
+        sw.pressed = true;
+        const connectedGate = gates.find(g => g.id === sw.gateId);
+        if (connectedGate) {
+            connectedGate.open = true;
+            showMessage("✨ Gate opened!");
+        }
+    }
+    
+    return true;
+}
+
+// ===== DEBUG LEVEL SELECTOR =====
+function toggleDebugMode() {
+    debugMode = !debugMode;
+    const selector = document.getElementById('debug-level-select');
+    if (selector) {
+        selector.style.display = debugMode ? 'block' : 'none';
+    }
+    if (debugMode) {
+        showMessage("🔧 Debug Mode ON - Select Level");
+    }
+}
+
+function jumpToLevel(levelNum) {
+    if (levelNum >= 0 && levelNum < LEVELS.length) {
+        currentLevel = levelNum;
+        loadLevel(currentLevel);
+        showMessage(`Jumped to Level ${levelNum + 1}`);
+    }
+}
+
+// Create debug UI on page load
+document.addEventListener('DOMContentLoaded', () => {
+    // Create debug level selector
+    const debugDiv = document.createElement('div');
+    debugDiv.id = 'debug-level-select';
+    debugDiv.style.cssText = 'display:none; position:fixed; top:10px; right:10px; background:rgba(0,0,0,0.9); padding:15px; border-radius:10px; border:2px solid #00ffff; z-index:1000;';
+    
+    let html = '<div style="color:#00ffff; margin-bottom:10px; font-weight:bold;">🔧 Level Select</div>';
+    html += '<div style="display:grid; grid-template-columns:repeat(5,1fr); gap:5px;">';
+    for (let i = 0; i < 10; i++) {
+        html += `<button onclick="jumpToLevel(${i})" style="padding:8px 12px; cursor:pointer; background:#333; color:#fff; border:1px solid #00ffff; border-radius:5px;">${i + 1}</button>`;
+    }
+    html += '</div>';
+    html += '<div style="color:#888; margin-top:10px; font-size:12px;">Press ~ to toggle</div>';
+    
+    debugDiv.innerHTML = html;
+    document.body.appendChild(debugDiv);
+});
+
+// Add debug key listener (~ key to toggle debug mode)
+document.addEventListener('keydown', (e) => {
+    if (e.key === '`' || e.key === '~') {
+        toggleDebugMode();
+    }
+    // Number keys 1-9 and 0 for quick level select when in debug mode
+    if (debugMode && e.key >= '0' && e.key <= '9') {
+        const levelNum = e.key === '0' ? 9 : parseInt(e.key) - 1;
+        jumpToLevel(levelNum);
+    }
+});

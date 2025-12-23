@@ -254,6 +254,29 @@ h2 {
         0 3px 0 #2d3436;
 }
 
+/* ===== ICE TILES ===== */
+.ice {
+    background: linear-gradient(145deg, #e0f7fa 0%, #b2ebf2 50%, #80deea 100%);
+    box-shadow: 
+        inset 0 2px 8px rgba(255,255,255,0.8),
+        inset 0 -2px 4px rgba(0, 188, 212, 0.3),
+        0 3px 0 #26c6da,
+        0 0 15px rgba(0, 188, 212, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    animation: iceShimmer 2s ease-in-out infinite;
+}
+
+@keyframes iceShimmer {
+    0%, 100% { 
+        background: linear-gradient(145deg, #e0f7fa 0%, #b2ebf2 50%, #80deea 100%);
+        box-shadow: inset 0 2px 8px rgba(255,255,255,0.8), inset 0 -2px 4px rgba(0, 188, 212, 0.3), 0 3px 0 #26c6da, 0 0 15px rgba(0, 188, 212, 0.3);
+    }
+    50% { 
+        background: linear-gradient(145deg, #ffffff 0%, #e0f7fa 50%, #b2ebf2 100%);
+        box-shadow: inset 0 2px 8px rgba(255,255,255,1), inset 0 -2px 4px rgba(0, 188, 212, 0.5), 0 3px 0 #26c6da, 0 0 25px rgba(0, 188, 212, 0.5);
+    }
+}
+
 .switch {
     background: linear-gradient(145deg, #636e72 0%, #4a5568 100%);
     box-shadow: 
