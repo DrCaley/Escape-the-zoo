@@ -43,27 +43,27 @@ const LEVELS = [
         name: "Level 1: Push & Collect",
         width: 10,
         height: 8,
-        hint: "Push the 📦 box out of the way to get the 🔑 key!",
+        hint: "Push the 📦 box to the side, grab the 🔑, free the 🦁!",
         playerStart: { x: 1, y: 6 },
         // W=Wall, .=Floor, C=Cage with animal, K=Key, B=Box, S=Switch, G=Gate, ~=Water
         map: [
             "WWWWWWWWWW",
             "W........W",
-            "W..WWW...W",
-            "W..WKW...W",
-            "W..WBW...W",
-            "W..W.W.C.W",
+            "W........W",
+            "W..K.....W",
+            "W..B...C.W",
+            "W........W",
             "W........W",
             "WWWWWWWWWW"
         ],
         animals: [
-            { x: 7, y: 5, type: 'LION', freed: false }
+            { x: 7, y: 4, type: 'LION', freed: false }
         ],
         zookeepers: [
-            { x: 5, y: 2, patrolAxis: 'x', min: 4, max: 7, dir: 1, speed: 1200 }
+            { x: 5, y: 2, patrolAxis: 'x', min: 3, max: 7, dir: 1, speed: 1200 }
         ],
-        boxes: [{ x: 4, y: 4 }],
-        keys: [{ x: 4, y: 3, collected: false }],
+        boxes: [{ x: 3, y: 4 }],
+        keys: [{ x: 3, y: 3, collected: false }],
         switches: [],
         gates: [],
         water: []
