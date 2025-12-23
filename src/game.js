@@ -413,22 +413,11 @@ function tryMove(dx, dy) {
         }
     }
     
-    // Move player!
-    player.x = newX;
-    player.y = newY;
-    
-    // Check for key pickup
-    const key = levelKeys.find(k => k.x === newX && k.y === newY && !k.collected);
-    if (key) {
-        key.collected = true;
-        keysCollected++;
-        showMessage("🔑 Got a key!");
-    }
-    
-    // Check for animal cage interaction
+    // Check for animal cage - need key to enter!
     const animal = animals.find(a => a.x === newX && a.y === newY && !a.freed);
     if (animal) {
         if (keysCollected > 0) {
+            // Has key - free the animal!
             keysCollected--;
             animal.freed = true;
             freedAnimals.push(EMOJI[animal.type]);
@@ -439,11 +428,24 @@ function tryMove(dx, dy) {
                 setTimeout(winLevel, 600);
             }
         } else {
+            // No key - can't enter cage
             showMessage("🔒 Need a key!");
-            // Push player back (can't enter cage without key)
-            player.x -= dx;
-            player.y -= dy;
+            updateUI();
+            renderBoard();
+            return; // Don't move onto the cage
         }
+    }
+    
+    // Move player!
+    player.x = newX;
+    player.y = newY;
+    
+    // Check for key pickup
+    const key = levelKeys.find(k => k.x === newX && k.y === newY && !k.collected);
+    if (key) {
+        key.collected = true;
+        keysCollected++;
+        showMessage("🔑 Got a key!");
     }
     
     // Check zookeeper collision
