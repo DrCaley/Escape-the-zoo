@@ -138,38 +138,36 @@ const LEVELS = [
     // LEVEL 4: All mechanics combined!
     {
         name: "Level 4: The Great Escape",
-        width: 14,
+        width: 12,
         height: 10,
-        hint: "Use boxes, switches, bridges - free all the animals! 🎯",
+        hint: "Push boxes right into the water, then use the switch! 🎯",
         playerStart: { x: 1, y: 8 },
         map: [
-            "WWWWWWWWWWWWWW",
-            "W.....G....C.W",
-            "W.S...WWWWWWWW",
-            "W.....W......W",
-            "WWWWWWW......W",
-            "W.K..~~....C.W",
-            "W....~~......W",
-            "W....~~WWWWWWW",
-            "W..B.......K.W",
-            "WWWWWWWWWWWWWW"
+            "WWWWWWWWWWWW",
+            "W........C.W",
+            "W..WWGWWWWWW",
+            "W..W.....K.W",
+            "W..W.......W",
+            "W.B~.....C.W",
+            "W.B~.......W",
+            "W..WWWWSWWWW",
+            "WK.........W",
+            "WWWWWWWWWWWW"
         ],
         animals: [
-            { x: 11, y: 1, type: 'GIRAFFE', freed: false },
-            { x: 11, y: 5, type: 'PARROT', freed: false }
+            { x: 9, y: 1, type: 'GIRAFFE', freed: false },
+            { x: 9, y: 5, type: 'PARROT', freed: false }
         ],
         zookeepers: [
-            { x: 3, y: 3, patrolAxis: 'x', min: 1, max: 5, dir: 1, speed: 850 },
-            { x: 9, y: 4, patrolAxis: 'y', min: 3, max: 6, dir: 1, speed: 950 }
+            { x: 5, y: 4, patrolAxis: 'x', min: 4, max: 9, dir: 1, speed: 900 }
         ],
-        boxes: [{ x: 3, y: 8 }, { x: 8, y: 4 }, { x: 10, y: 4 }],
-        keys: [{ x: 2, y: 5, collected: false }, { x: 12, y: 8, collected: false }],
-        switches: [{ x: 2, y: 2, pressed: false, gateId: 0 }],
-        gates: [{ x: 6, y: 1, open: false, id: 0 }],
+        boxes: [{ x: 2, y: 5 }, { x: 2, y: 6 }],
+        keys: [{ x: 1, y: 8, collected: false }, { x: 10, y: 3, collected: false }],
+        switches: [{ x: 7, y: 7, pressed: false, gateId: 0 }],
+        gates: [{ x: 5, y: 2, open: false, id: 0 }],
         water: [
-            { x: 5, y: 5, filled: false }, { x: 6, y: 5, filled: false },
-            { x: 5, y: 6, filled: false }, { x: 6, y: 6, filled: false },
-            { x: 5, y: 7, filled: false }, { x: 6, y: 7, filled: false }
+            { x: 3, y: 5, filled: false },
+            { x: 3, y: 6, filled: false }
         ]
     },
     
