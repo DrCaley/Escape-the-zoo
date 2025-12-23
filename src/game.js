@@ -241,28 +241,29 @@ const LEVELS = [
         map: [
             "WWWWWWWWWWWW",
             "W..........W",
-            "W....C.....W",
-            "W..WWWWWW..W",
-            "W..W....W..W",
-            "W..W.K..W..W",
-            "W..WWWWWW..W",
+            "W........C.W",
+            "W..........W",
+            "W..........W",
+            "W..K.......W",
+            "W..........W",
             "W..........W",
             "WWWWWWWWWWWW"
         ],
         animals: [
-            { x: 5, y: 2, type: 'ZEBRA', freed: false }
+            { x: 9, y: 2, type: 'ZEBRA', freed: false }
         ],
         zookeepers: [
-            { x: 9, y: 4, patrolAxis: 'y', min: 1, max: 7, dir: 1, speed: 600 }
+            { x: 6, y: 4, patrolAxis: 'y', min: 1, max: 7, dir: 1, speed: 600 }
         ],
         boxes: [],
-        keys: [{ x: 5, y: 5, collected: false }],
+        keys: [{ x: 3, y: 5, collected: false }],
         switches: [],
         gates: [],
         water: [],
         ice: [
-            { x: 4, y: 4 }, { x: 5, y: 4 }, { x: 6, y: 4 }, { x: 7, y: 4 },
-            { x: 4, y: 5 }, { x: 6, y: 5 }, { x: 7, y: 5 }
+            { x: 4, y: 3 }, { x: 5, y: 3 }, { x: 6, y: 3 }, { x: 7, y: 3 }, { x: 8, y: 3 },
+            { x: 4, y: 4 }, { x: 5, y: 4 }, { x: 7, y: 4 }, { x: 8, y: 4 },
+            { x: 4, y: 5 }, { x: 5, y: 5 }, { x: 6, y: 5 }, { x: 7, y: 5 }, { x: 8, y: 5 }
         ]
     },
     
@@ -277,11 +278,11 @@ const LEVELS = [
             "WWWWWWWWWWWW",
             "W........C.W",
             "W..........W",
-            "W...WWWWWWWW",
-            "W...W......W",
-            "W.B.W..K...W",
-            "W...W......W",
-            "W...WWWWWWWW",
+            "W..........W",
+            "W..........W",
+            "W.B......K.W",
+            "W..........W",
+            "W..........W",
             "W..........W",
             "WWWWWWWWWWWW"
         ],
@@ -290,17 +291,17 @@ const LEVELS = [
         ],
         zookeepers: [
             { x: 6, y: 2, patrolAxis: 'x', min: 1, max: 9, dir: 1, speed: 500 },
-            { x: 2, y: 6, patrolAxis: 'y', min: 4, max: 8, dir: 1, speed: 650 }
+            { x: 3, y: 7, patrolAxis: 'x', min: 1, max: 9, dir: -1, speed: 650 }
         ],
         boxes: [{ x: 2, y: 5 }],
-        keys: [{ x: 7, y: 5, collected: false }],
+        keys: [{ x: 9, y: 5, collected: false }],
         switches: [],
         gates: [],
         water: [],
         ice: [
-            { x: 5, y: 4 }, { x: 6, y: 4 }, { x: 7, y: 4 }, { x: 8, y: 4 }, { x: 9, y: 4 },
-            { x: 5, y: 5 }, { x: 6, y: 5 }, { x: 8, y: 5 }, { x: 9, y: 5 },
-            { x: 5, y: 6 }, { x: 6, y: 6 }, { x: 7, y: 6 }, { x: 8, y: 6 }, { x: 9, y: 6 }
+            { x: 3, y: 4 }, { x: 4, y: 4 }, { x: 5, y: 4 }, { x: 6, y: 4 }, { x: 7, y: 4 }, { x: 8, y: 4 },
+            { x: 3, y: 5 }, { x: 4, y: 5 }, { x: 5, y: 5 }, { x: 6, y: 5 }, { x: 7, y: 5 }, { x: 8, y: 5 },
+            { x: 3, y: 6 }, { x: 4, y: 6 }, { x: 5, y: 6 }, { x: 6, y: 6 }, { x: 7, y: 6 }, { x: 8, y: 6 }
         ]
     },
     
@@ -314,11 +315,11 @@ const LEVELS = [
         map: [
             "WWWWWWWWWWWWWW",
             "W............W",
-            "W....WWGWWWWWW",
-            "W....W.....C.W",
-            "W..B.W.......W",
-            "W....W.S.....W",
-            "W....WWWWWWWWW",
+            "W.....G......W",
+            "W.....W....C.W",
+            "W..B..W......W",
+            "W.....W..S...W",
+            "W.....WWWWWWWW",
             "W.K..........W",
             "W............W",
             "WWWWWWWWWWWWWW"
@@ -332,14 +333,14 @@ const LEVELS = [
         ],
         boxes: [{ x: 3, y: 4 }],
         keys: [{ x: 2, y: 7, collected: false }],
-        switches: [{ x: 7, y: 5, pressed: false, gateId: 0 }],
-        gates: [{ x: 7, y: 2, open: false, id: 0 }],
+        switches: [{ x: 9, y: 5, pressed: false, gateId: 0 }],
+        gates: [{ x: 6, y: 2, open: false, id: 0 }],
         water: [],
         ice: [
-            { x: 4, y: 3 }, { x: 4, y: 4 }, { x: 4, y: 5 },
-            { x: 6, y: 3 }, { x: 7, y: 3 }, { x: 8, y: 3 }, { x: 9, y: 3 }, { x: 10, y: 3 },
-            { x: 6, y: 4 }, { x: 7, y: 4 }, { x: 8, y: 4 }, { x: 9, y: 4 }, { x: 10, y: 4 },
-            { x: 6, y: 5 }, { x: 8, y: 5 }, { x: 9, y: 5 }, { x: 10, y: 5 }
+            { x: 7, y: 3 }, { x: 8, y: 3 }, { x: 9, y: 3 }, { x: 10, y: 3 },
+            { x: 7, y: 4 }, { x: 8, y: 4 }, { x: 9, y: 4 }, { x: 10, y: 4 },
+            { x: 7, y: 5 }, { x: 8, y: 5 }, { x: 10, y: 5 },
+            { x: 4, y: 4 }, { x: 4, y: 5 }
         ]
     },
     
@@ -353,12 +354,12 @@ const LEVELS = [
         map: [
             "WWWWWWWWWWWWWW",
             "W.K........C.W",
-            "W..WWWWGWWWWWW",
-            "W..W.....S...W",
-            "W..W.........W",
-            "W.BW..~~.....W",
-            "W.BW..~~...C.W",
-            "W..WWWWWWWWWWW",
+            "W......G.....W",
+            "W......W.S...W",
+            "W......W.....W",
+            "W.B....~~....W",
+            "W.B....~~..C.W",
+            "W......WWWWWWW",
             "W..K.........W",
             "W............W",
             "WWWWWWWWWWWWWW"
@@ -369,21 +370,21 @@ const LEVELS = [
         ],
         zookeepers: [
             { x: 5, y: 9, patrolAxis: 'x', min: 1, max: 11, dir: 1, speed: 400 },
-            { x: 8, y: 4, patrolAxis: 'y', min: 3, max: 6, dir: 1, speed: 500 }
+            { x: 10, y: 4, patrolAxis: 'y', min: 3, max: 6, dir: 1, speed: 500 }
         ],
         boxes: [{ x: 2, y: 5 }, { x: 2, y: 6 }],
         keys: [{ x: 2, y: 1, collected: false }, { x: 3, y: 8, collected: false }],
         switches: [{ x: 9, y: 3, pressed: false, gateId: 0 }],
         gates: [{ x: 7, y: 2, open: false, id: 0 }],
         water: [
-            { x: 6, y: 5, filled: false }, { x: 7, y: 5, filled: false },
-            { x: 6, y: 6, filled: false }, { x: 7, y: 6, filled: false }
+            { x: 7, y: 5, filled: false }, { x: 8, y: 5, filled: false },
+            { x: 7, y: 6, filled: false }, { x: 8, y: 6, filled: false }
         ],
         ice: [
-            { x: 4, y: 3 }, { x: 5, y: 3 }, { x: 6, y: 3 }, { x: 7, y: 3 }, { x: 8, y: 3 }, { x: 10, y: 3 }, { x: 11, y: 3 },
-            { x: 4, y: 4 }, { x: 5, y: 4 }, { x: 6, y: 4 }, { x: 7, y: 4 }, { x: 9, y: 4 }, { x: 10, y: 4 }, { x: 11, y: 4 },
-            { x: 4, y: 5 }, { x: 5, y: 5 }, { x: 8, y: 5 }, { x: 9, y: 5 }, { x: 10, y: 5 },
-            { x: 4, y: 6 }, { x: 5, y: 6 }, { x: 8, y: 6 }, { x: 9, y: 6 }, { x: 10, y: 6 }
+            { x: 3, y: 3 }, { x: 4, y: 3 }, { x: 5, y: 3 }, { x: 8, y: 3 }, { x: 10, y: 3 }, { x: 11, y: 3 },
+            { x: 3, y: 4 }, { x: 4, y: 4 }, { x: 5, y: 4 }, { x: 8, y: 4 }, { x: 9, y: 4 }, { x: 10, y: 4 }, { x: 11, y: 4 },
+            { x: 3, y: 5 }, { x: 4, y: 5 }, { x: 5, y: 5 }, { x: 6, y: 5 }, { x: 9, y: 5 }, { x: 10, y: 5 },
+            { x: 3, y: 6 }, { x: 4, y: 6 }, { x: 5, y: 6 }, { x: 6, y: 6 }, { x: 9, y: 6 }, { x: 10, y: 6 }
         ]
     },
     
